@@ -1,3 +1,4 @@
+const { time } = require('console')
 const express = require('express')
 const app = express()
 
@@ -26,9 +27,12 @@ let persons = [
 
 app.use(express.json())
 
-app.get('/', (request, response) => {
-  response.send('<h1>Hello World!</h1>')
-})
+app.get('/info', (request, response) => {
+    const timeAndDate = new Date()
+    response.send(`
+    <p>Phonebook has info for ${persons.length} people</p>
+    <p>${timeAndDate}</p>`)
+  })
 
 app.get('/api/persons', (request, response) => {
   response.json(persons)
