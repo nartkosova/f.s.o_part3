@@ -26,7 +26,7 @@ let persons = [
 ]
 
 app.use(express.json())
-app.use(morgan('tiny'))
+app.use(morgan(':method :url :body'))
 
 app.get('/info', (request, response) => {
     const timeAndDate = new Date()
@@ -83,6 +83,9 @@ app.delete('/api/persons/:id', (request, response) => {
   persons = persons.filter(person => person.id !== id)
 
   response.status(204).end()
+})
+morgan.token('body', req => {
+  return JSON.stringify(req.body)
 })
 
 const PORT = 3001
