@@ -48,18 +48,20 @@ app.get('/api/persons/:id', (request, response) => {
 })
 
 const generateId = () => {
-  const maxId = persons.length > 0
-    ? Math.max(...persons.map(n => n.id))
-    : 0
-  return maxId + 1
+  return Math.floor(Math.random() * 1000000)
 }
 
 app.post('/api/persons', (request, response) => {
   const body = request.body
 
-  if (!body.name || body.number) {
+  if (!body.name || !body.number) {
     return response.status(400).json({ 
       error: 'name or number missing' 
+    })
+  }
+  if (persons.find(person => person.name === body.name)) {
+    return response.status(400).json({
+      error: 'name must be unique'
     })
   }
 
