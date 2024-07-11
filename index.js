@@ -88,9 +88,7 @@ app.get('/api/persons/:id', (request, response) => {
 })
 .catch(error => next(error))
   })
-
-
-app.get('/api/persons/:id', (request, response, next) => {
+app.get('/api/persons/:id', (request, response, next) => {//exercise 3.18
   Person.findById(request.params.id)
     .then(person => {
       if (person) {
@@ -110,7 +108,6 @@ app.delete('/api/persons/:id', (request, response, next) => {
 })
 app.put('/api/persons/:id', (request, response, next) => {
   const body = request.body
-
   const person = {
     name: body.name,
     number: body.number,
