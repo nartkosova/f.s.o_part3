@@ -25,20 +25,20 @@ const personsSchema = new mongoose.Schema({
 const Person = mongoose.model('Person', personsSchema)
 
 if (!addPerson || !addNumber) {
-    Person.find({}).then(result => {
-        result.forEach(person => {
-          console.log(person)
-        })
-        mongoose.connection.close()
-      })
+  Person.find({}).then(result => {
+    result.forEach(person => {
+      console.log(person)
+    })
+    mongoose.connection.close()
+  })
 }else {
-const person = new Person({
+  const person = new Person({
     name: addPerson,
     number: addNumber,
-})
+  })
 
-person.save().then(result => {
-  console.log(`added ${addPerson} number ${addNumber} to phonebook`)
-  mongoose.connection.close()
-})
+  person.save().then(result => {
+    console.log(`added ${addPerson} number ${addNumber} to phonebook`)
+    mongoose.connection.close()
+  })
 }
